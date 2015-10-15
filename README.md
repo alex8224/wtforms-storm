@@ -16,7 +16,7 @@ example
        username = StringField(validators=[input_required()])
        address = Unicode()
      '''
-    model = User
+        model = User
 
     class UserForm1(ModelForm):
     '''
