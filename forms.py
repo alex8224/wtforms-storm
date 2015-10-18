@@ -34,7 +34,7 @@ class _ModelFormFactory(object):
                     DateTime:DateTimeField
                 }
 
-    def get_field(self, column, **kwargs):
+    def get_field(self, column):
 
         if column.__class__ not in self.column_field:
             raise ValueError("%s -> field not found!" % column.__class__)
@@ -52,7 +52,7 @@ class _ModelFormFactory(object):
         if "default" in column.__dict__:
             field_kwargs["default"] = column.__dict__["default"]
 
-        return field_cls(*args, **kwargs)
+        return field_cls(*args, **field_kwargs)
 
     def create_modelform(self, model, **kwargs):
 
@@ -73,7 +73,7 @@ class _ModelFormFactory(object):
  
         attrs = OrderedDict()
         for name, prop in props:
-            attrs[name] = self.get_field(prop, **kwargs)
+            attrs[name] = self.get_field(prop)
         return attrs
 
 
